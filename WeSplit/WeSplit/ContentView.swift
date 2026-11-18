@@ -49,17 +49,19 @@ struct ContentView: View {
                 }
                 Section("How much tip do you want to leave?") {
                     Picker("Tip percentage", selection: $tipPercentage) {
-                        ForEach(0..<101) {
-                            Text($0, format: .percent)
-                        }
-//                        ForEach(tipPercentages, id: \.self) {
+//                        ForEach(0..<101) {
 //                            Text($0, format: .percent)
 //                        }
+                        ForEach(tipPercentages, id: \.self) {
+                            Text($0, format: .percent)
+                        }
                     }.pickerStyle(.navigationLink)
                 }
                 Section("Total amount for check") {
+                    
                     Text(grandTotal,
                          format: .currency(code: Locale.current.currency?.identifier ?? "PLN"))
+                    .foregroundStyle(tipPercentage == 0 ? .red : .black)
                 }
                 Section("Amount per person") {
                     Text(totalPerPerson,
