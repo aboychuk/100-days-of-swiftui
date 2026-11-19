@@ -15,13 +15,18 @@ struct ContentView: View {
     @State private var score: Int = 0
     @State private var showingEndGame = false
     
+    struct FlagView: View {
+        let imageName: String
+        
+        var body: some View {
+            Image(imageName)
+                .clipShape(.capsule)
+                .shadow(radius: 5)
+        }
+    }
+    
     var body: some View {
         ZStack {
-            //Liniar gradient background
-            //            LinearGradient(colors: [.indigo, .black],
-            //                           startPoint: .top,
-            //                           endPoint: .bottom)
-            //            .ignoresSafeArea()
             RadialGradient(stops: [
                 .init(color: Color(red: 0.1, green: 0.2, blue: 0.45), location: 0.3),
                 .init(color: Color(red: 0.76, green: 0.15, blue: 0.26), location: 0.3),
@@ -46,9 +51,7 @@ struct ContentView: View {
                         Button {
                             flagTapped(number)
                         } label: {
-                            Image(countries[number])
-                                .clipShape(.capsule)
-                                .shadow(radius: 5)
+                            FlagView(imageName: (countries[number]))
                         }
                     }
                 }
